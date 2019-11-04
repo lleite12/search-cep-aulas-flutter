@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:search_cep/services/via_cep_service.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
+
 
 class _HomePageState extends State<HomePage> {
   var _searchCepController = TextEditingController();
@@ -23,6 +25,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Consultar CEP'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.wb_sunny),
+            onPressed: ()
+              {
+                changeBrightness();
+              },
+              ),
+          IconButton(
+            icon: Icon(Icons.share),            
+              )
+              ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.0),
@@ -97,4 +111,12 @@ class _HomePageState extends State<HomePage> {
       child: Text(_result ?? ''),
     );
   }
+
+  void changeBrightness() {
+        DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
+  }
+  
 }
+
+ 
+  
