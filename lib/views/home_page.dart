@@ -39,10 +39,10 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.share),  
             onPressed: ()
               {
-                Share.share("CEP: ${resultCep.cep ?? ""} \n " +
-                            "UF: ${resultCep.uf ?? ""} \n " +
-                            "CIDADE: ${resultCep.localidade ?? ""} \n " +
-                            "BAIRRO: ${resultCep.bairro ?? ""} \n " +
+                Share.share("CEP: ${resultCep.cep ?? ""} \n" +
+                            "UF: ${resultCep.uf ?? ""} \n" +
+                            "CIDADE: ${resultCep.localidade ?? ""} \n" +
+                            "BAIRRO: ${resultCep.bairro ?? ""} \n" +
                             "LOGRADOURO: ${resultCep.logradouro ?? ""}");
               },          
               )
