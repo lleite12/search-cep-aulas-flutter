@@ -35,7 +35,11 @@ class _HomePageState extends State<HomePage> {
               },
               ),
           IconButton(
-            icon: Icon(Icons.share),            
+            icon: Icon(Icons.share),  
+            onPressed: ()
+              {
+                shared();
+              },          
               )
               ],
       ),
@@ -139,6 +143,10 @@ class _HomePageState extends State<HomePage> {
 
   void changeBrightness() {
         DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
+  }
+
+  void shared(){
+    
   }
   
 }
