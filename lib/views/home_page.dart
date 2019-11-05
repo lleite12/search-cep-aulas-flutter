@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:search_cep/models/result_cep.dart';
 import 'package:search_cep/services/via_cep_service.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 
@@ -90,13 +91,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  ResultCep resultCep = new ResultCep();
+
   Future _searchCep() async {
     _searching(true);
 
     final cep = _searchCepController.text;
 
-    final resultCep = await ViaCepService.fetchCep(cep: cep);
-    print(resultCep.localidade); // Exibindo somente a localidade no terminal
+    resultCep = await ViaCepService.fetchCep(cep: cep);
 
     setState(() {
       _result = resultCep.toJson();
@@ -108,9 +110,32 @@ class _HomePageState extends State<HomePage> {
   Widget _buildResultForm() {
     return Container(
       padding: EdgeInsets.only(top: 20.0),
-      child: Text(_result ?? ''),
+      child: Column(
+        children: <Widget>[
+          _text("CEP", resultCep.cep),
+          _text("UF", resultCep.uf),
+          _text("CIDADE", resultCep.localidade),
+          _text("BAIRRO", resultCep.bairro),
+          _text("LOGRADOURO", resultCep.logradouro)
+        ],        
+      ),      
     );
   }
+
+  Widget _text(label,value){
+
+    final myController = TextEditingController();
+    myController.text = value;
+
+    return TextFormField(
+      decoration: InputDecoration(labelText: label),
+      controller: myController,
+      enabled: false         
+      );
+
+  }
+
+  
 
   void changeBrightness() {
         DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
