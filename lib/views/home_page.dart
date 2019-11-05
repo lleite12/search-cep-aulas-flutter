@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:search_cep/models/result_cep.dart';
 import 'package:search_cep/services/via_cep_service.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:share/share.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -38,7 +39,11 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.share),  
             onPressed: ()
               {
-                shared();
+                Share.share("CEP: ${resultCep.cep ?? ""} \n " +
+                            "UF: ${resultCep.uf ?? ""} \n " +
+                            "CIDADE: ${resultCep.localidade ?? ""} \n " +
+                            "BAIRRO: ${resultCep.bairro ?? ""} \n " +
+                            "LOGRADOURO: ${resultCep.logradouro ?? ""}");
               },          
               )
               ],
@@ -139,14 +144,8 @@ class _HomePageState extends State<HomePage> {
 
   }
 
-  
-
   void changeBrightness() {
         DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
-  }
-
-  void shared(){
-    
   }
   
 }
